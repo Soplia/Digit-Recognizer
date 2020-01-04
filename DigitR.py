@@ -18,17 +18,17 @@ class LinearR(nn.Module):
     def forward(self, x):
         return self.linear(x)
 
-dev = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+
 model = LinearR(R.inputDim, R.outputDim)
-model = model.to(dev)
+model = model.to(R.dev)
 lossF = nn.MSELoss()
 op = torch.optim.SGD(model.parameters(), R.learnR)
 
 
 car_prices_array = [3,4,5,6,7,8,9]
 number_of_car_sell_array = [ 7.5, 7, 6.5, 6.0, 5.5, 5.0, 4.5]
-carPrice = torch.tensor(car_prices_array, dtype= torch.float32, device= dev)
-carNum = torch.tensor(number_of_car_sell_array, dtype= torch.float32, device= dev)
+carPrice = torch.tensor(car_prices_array, dtype= torch.float32, device= R.dev)
+carNum = torch.tensor(number_of_car_sell_array, dtype= torch.float32, device= R.dev)
 
 #carPrice = torch.tensor(car_prices_array, dtype= torch.float32)
 #carNum = torch.tensor(number_of_car_sell_array, dtype= torch.float32)
