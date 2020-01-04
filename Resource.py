@@ -1,6 +1,6 @@
 import torch
 
-dataPath = '../../../Data/minist'
+dataPath = '../../../Data/minist/train.csv'
 inputDim = 1
 outputDim = 1
 epoch = 100000
