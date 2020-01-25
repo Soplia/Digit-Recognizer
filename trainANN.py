@@ -24,18 +24,6 @@ feaTh = feaTh.to(dev)
 trainDs = torch.utils.data.TensorDataset(feaTh, tarTh)
 trainLd = torch.utils.data.DataLoader(trainDs, batch_size= batchSize, shuffle= False)
 
-#dataR = pd.read_csv(R.dataPath)
-#attributes = dataR[:, dataR.columns != 'label'].values / 255
-#labels = dataR.label.values
-#attTh = torch.from_numpy(attributes)
-#labelTh = torch.from_numpy(labels)
-#attTh = attTh.to(R.device)
-#labelTh = labelTh.to(R.device)
-
-#trainDs = torch.utils.data.Dataset(attTh, labelTh)
-#batchSize = 1000
-#trainLd = torch.utils.data.DataLoader(trainDs, batch_size= batchSize)
-
 class ANN(nn.Module):
     def __init__(self, intputDim, hiddenDim, outputDim):
         super(ANN, self).__init__()
@@ -52,7 +40,6 @@ class ANN(nn.Module):
         out3 = self.elu(self.h2(out2))
         out4 = self.fc2(out3)
         return out4
-
 
 model = ANN(28 * 28, 150, 10)
 model = model.to(R.device)
