@@ -8,6 +8,7 @@ import numpy as np
 import Resource as R
 import matplotlib.pyplot as plt
 
+
 trainDf = pd.read_csv(R.dataPath)
 numClass = len(set(trainDf.label.values))
 
@@ -31,10 +32,10 @@ tarTrain = torch.from_numpy(trainDf.label.values).to(R.device)
 #feaTrain = torch.from_numpy(trainDf.loc[:, trainDf.columns != 'label'].values / 255).type(torch.float)
 #tarTrain = torch.from_numpy(trainDf.label.values)
 
-batchSize = 1000
+batchSize = 1500
 
 trainDs = torch.utils.data.TensorDataset(feaTrain, tarTrain)
-trainLd = torch.utils.data.DataLoader(trainDs, batch_size= batchSize, shuffle= False)
+trainLd = torch.utils.data.DataLoader(trainDs, num_workers= 0, batch_size= batchSize, shuffle= True)
 
 class CNN(nn.Module):
     def __init__(self):
@@ -114,6 +115,10 @@ def train(epoch):
         print('Train Epoch: {} [{}/{} ({:.0f}%)]\tLoss: {:.6f}'.format(
                 epoch, (batch_idx + 1) * len(data), len(trainLd.dataset),
                 100. * (batch_idx + 1) / len(trainLd), loss.item()))
+        print(torch.cuda.get_device_name(0))
+        print('Memory Usage:')
+        print('Allocated:', round(torch.cuda.memory_allocated(0)/1024**3,1), 'GB')
+        print('Cached:   ', round(torch.cuda.memory_cached(0)/1024**3,1), 'GB')
 
 def evaluate(data_loader):
     #model.eval() or model.train(mode=False) to tell that you are testing.
