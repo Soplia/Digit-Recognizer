@@ -18,7 +18,6 @@ print ('Number of class: ', numClass)
 #randData = np.random.randint(low= 0, high= trainDf.shape[0], size = 8)
 #grid = make_grid(torch.tensor(trainDf.iloc[randData, 1:].values.reshape(-1, 28, 28) / 255).unsqueeze(1), 
 #                 nrow= 8)
-
 #plt.imshow(grid.numpy().transpose(1, 2, 0))
 #print (*list(trainDf.iloc[randData, 0].values), sep= ',')
 #plt.show()
